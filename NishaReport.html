@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nisha's 2025 Accessibility Dashboard</title>
+    <style>
+        :root {
+            --primary: #0176D3;
+            --secondary: #0B5CAB;
+            --bg: #F3F3F3;
+            --white: #FFFFFF;
+            --text: #181818;
+            --border: #DDDBDA;
+            --q1: #0176D3; /* Blue */
+            --q2: #2E844A; /* Green */
+            --q3: #DD7A01; /* Orange */
+            --q4: #706e6b; /* Grey/Purple */
+        }
+        
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Sidebar */
+        .sidebar { width: 250px; background: var(--secondary); color: white; display: flex; flex-direction: column; padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.1); }
+        .sidebar h2 { font-size: 1.2rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
+        .menu-item { padding: 12px; margin-bottom: 5px; cursor: pointer; border-radius: 4px; transition: 0.2s; opacity: 0.8; text-decoration: none; color: white; display: block;}
+        .menu-item:hover, .menu-item.active { background: rgba(255,255,255,0.2); opacity: 1; font-weight: bold; }
+        .menu-header { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px; opacity: 0.6; }
+
+        /* Main Content */
+        .main { flex: 1; padding: 30px; overflow-y: auto; }
+        .header { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { margin: 0; font-size: 1.8rem; }
+        
+        /* Quarter Tabs */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
+        .tab { padding: 10px 20px; cursor: pointer; font-weight: bold; color: #777; border-bottom: 3px solid transparent; transition: 0.3s; }
+        .tab:hover { color: var(--primary); background: #fff; }
+        .tab.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+        
+        /* Content Cards */
+        .card-container { display: none; animation: fadeIn 0.4s ease; }
+        .card-container.active { display: block; }
+        
+        .project-card { background: var(--white); border-radius: 8px; padding: 20px; margin-bottom: 15px; border-left: 5px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .project-card.q1 { border-left-color: var(--q1); }
+        .project-card.q2 { border-left-color: var(--q2); }
+        .project-card.q3 { border-left-color: var(--q3); }
+        .project-card.q4 { border-left-color: var(--q4); }
+        
+        .card-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .month-badge { font-size: 0.8rem; text-transform: uppercase; font-weight: bold; color: #666; background: #eee; padding: 2px 8px; border-radius: 4px; }
+        
+        .link-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .action-btn { 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 5px; 
+            transition: 0.2s;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            background: #fdfdfd;
+        }
+        .action-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .figma { border-color: #a259ff; color: #a259ff; }
+        .figma:hover { background: #a259ff; color: white; }
+        .sheet { border-color: #0f9d58; color: #0f9d58; }
+        .sheet:hover { background: #0f9d58; color: white; }
+        .quip { border-color: #d72b3f; color: #d72b3f; }
+        .quip:hover { background: #d72b3f; color: white; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Accessibility Lead</h2>
+        <div class="menu-item active">Dashboard</div>
+        <div class="menu-header">Quick Access</div>
+        <a href="https://docs.google.com/spreadsheets/d/1hrxJUF7AcLypYxubC1COcyYoxVCl_AT5gGHq6D42Qc4/edit?usp=sharing" target="_blank" class="menu-item">Salesforce+ Tracker</a>
+        <a href="https://salesforce.quip.com/GjyCABEbkBlD" target="_blank" class="menu-item">Intopia Module List</a>
+        <a href="https://docs.google.com/spreadsheets/d/1fUXQL0ZaT83P7AfVfMhrEUD5F63rGeaGRlVzw6AHaYo/edit?usp=sharing" target="_blank" class="menu-item">Tableau Conference Pages</a>
+        <a href="https://docs.google.com/spreadsheets/d/12GKY7k83j5SKl_NCHIjitHXsqkgDjOGnKcQ27LzaI0s/edit?usp=sharing" target="_blank" class="menu-item">Investor</a>
+        <a href="https://docs.google.com/spreadsheets/d/1kRtAJ5GRnC1YXo3jCil3lS5ifORqUWeJrMncDKlkvDY/edit?usp=sharing" target="_blank" class="menu-item">Interactive Maps</a>
+        <a href="https://salesforce.quip.com/tZzkAQybW0Rb" target="_blank" class="menu-item">Trailhead Academy</a>
+        <a href="https://docs.google.com/spreadsheets/d/1qQLPi8ReQMCc8NfSs0wKZLJOHZnd99SiJFGihyyKFlg/edit?usp=sharing" target="_blank" class="menu-item">Agentforce for Dreamforce </a>
+        <a href="https://docs.google.com/presentation/d/1OKA9vpoBs26zq6yXA007qrVvhdTLPWhNw3aJ0rMI8h0/edit?usp=sharing" target="_blank" class="menu-item">Connections onsite and presentation </a>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <div>
+                <h1>Nisha's 2025 Work Summary</h1>
+                <p style="color: #666;">Salesforce Digital Experiences | Accessibility Team</p>
+            </div>
+            <div style="text-align: right;">
+                <span style="font-size: 0.9rem; font-weight: bold; color: var(--text);">Status:</span>
+                <span style="color: var(--q2);">Active</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('q1')">Q1 (Jan-Apr)</div>
+            <div class="tab" onclick="showTab('q2')">Q2 (May-Jul)</div>
+            <div class="tab" onclick="showTab('q3')">Q3 (Aug-Oct)</div>
+            <div class="tab" onclick="showTab('q4')">Q4 (Nov-Dec)</div>
+        </div>
+
+        <div id="q1" class="card-container active">
+            <div class="project-card q1">
+                <div class="card-header">
+                    <h3>Launch Readiness & Audits</h3>
+                    <span class="month-badge">January</span>
+                </div>
+                <p style="margin-bottom: 5px;">Focused on:</p>
+                <ul style="margin-top: 0; padding-left: 20px; line-height: 1.5;">
+                    <li>Salesforce+ reviews</li>
+                    <li>Tableau page builds</li>
+                    <li>IR Site carousel analysis</li>
+                </ul>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/spreadsheets/d/1hrxJUF7AcLypYxubC1COcyYoxVCl_AT5gGHq6D42Qc4/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 SF+ Priority Reviews</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1fUXQL0ZaT83P7AfVfMhrEUD5F63rGeaGRlVzw6AHaYo/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Tableau Evinced Scans</a>
+                    <a href="https://docs.google.com/spreadsheets/d/12GKY7k83j5SKl_NCHIjitHXsqkgDjOGnKcQ27LzaI0s/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 IR Site Gaps</a>
+                </div>
+            </div>
+
+            <div class="project-card q1">
+                <div class="card-header">
+                    <h3>Interactive Maps  & Event Readiness</h3>
+                    <span class="month-badge">February</span>
+                </div>
+                <p>Structured UAT testing for maps and Figma reviews for Attendee Readiness components.</p>
+                <ul style="margin-top: 0; padding-left: 20px; line-height: 1.5;">
+                    <li>Interactive Maps UAT</li>
+                    <li>Event Readiness Component</li>
+                    <li>Trailhead Academy</li>
+                    <li>Component Reviews</li>
+                </ul>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/spreadsheets/d/1kRtAJ5GRnC1YXo3jCil3lS5ifORqUWeJrMncDKlkvDY/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Maps UAT Tracker</a>
+                    <a href="https://www.figma.com/file/TJ41mgcFf2sJqkrav8SdKP?node-id=3153%3A2351" target="_blank" class="action-btn figma">🎨 Maps Figma</a>
+                    <a href="https://www.figma.com/design/v7dECkWYLUiEH0qwJM0QI1/Attendee-Readiness-Component?node-id=3351-14711&t=ldkx0lH12wZn2yS7-4" target="_blank" class="action-btn figma">🎨 Event Component</a>
+                    <a href="https://salesforce.quip.com/tZzkAQybW0Rb" target="_blank" class="action-btn quip">📝 Trailhead Requirements</a>
+                </div>
+            </div>
+
+            <div class="project-card q1">
+                <div class="card-header">
+                    <h3>Homepage & Airship Onboarding</h3>
+                    <span class="month-badge">March</span>
+                </div>
+                <p>Full homepage accessibility review and Airship wireframe feedback.</p>
+                <ul style="margin-top: 0; padding-left: 20px; line-height: 1.5;">
+                    <li>Homepage Redesign</li>
+                    <li>Airship Onboarding</li>
+                </ul>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/spreadsheets/d/11HX80aNU2Xx7XSybjEs_ltoUTu1ZTd0_e-NVefGT-o4/edit?gid=1812329125#gid=1812329125" target="_blank" class="action-btn sheet">📊 Airship Wireframes</a>
+            
+                </div>
+            </div>
+
+             <div class="project-card q1">
+                <div class="card-header">
+                    <h3>Intopia & Deep Dives</h3>
+                    <span class="month-badge">April</span>
+                </div>
+                <p>Deep dive reviews of detailed Figma files and Intopia coordination.</p>
+                <div class="link-grid">
+                    <a href="https://salesforce.quip.com/GjyCABEbkBlD" target="_blank" class="action-btn quip">📝 Cert Modules List</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="q2" class="card-container">
+            <div class="project-card q2">
+                <div class="card-header">
+                    <h3>Connections Prep & Partner Audit</h3>
+                    <span class="month-badge">May</span>
+                </div>
+        
+                 <ul style="margin-top: 0; padding-left: 20px; line-height: 1.5;">
+                    <li>Salesforce+ QA</li>
+                    <li>Connections Eventt app evaluation</li>
+                    <li>Partners Site Audit</li>
+                </ul>
+                <div class="link-grid">
+                    <a href="https://sfplus-evnt-exp-qa-3b778809976c.herokuapp.com/plus/explore/data" target="_blank" class="action-btn">🔗 SF+ QA Env</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1074Sv5oxdIG6svIHMol7kzSVN0KZdvg1dc9jw__jDb4/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Map Behaviors</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1UBG71gItzQh4-70hJMc4LLH7F2q8u3-nNrRbT6cu1Gg/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Partner Audit</a>
+                </div>
+            </div>
+
+            <div class="project-card q2">
+                <div class="card-header">
+                    <h3>Certifications & Documentation</h3>
+                    <span class="month-badge">June</span>
+                </div>
+                <p>Trailhead certification testing coordination and documentation updates.</p>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/spreadsheets/d/1fFlP2Knehq0qt490CCDEvt64US4fb7BXBSNw8Bj2MA0/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Cert Testing</a>
+                </div>
+            </div>
+
+            <div class="project-card q2">
+                <div class="card-header">
+                    <h3>Connections Event Execution</h3>
+                    <span class="month-badge">July</span>
+                </div>
+                <p>On-site testing in Chicago and presentation delivery.</p>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/presentation/d/1OKA9vpoBs26zq6yXA007qrVvhdTLPWhNw3aJ0rMI8h0/edit?usp=sharing" target="_blank" class="action-btn quip">🎤 CNX Presentation</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="q3" class="card-container">
+            <div class="project-card q3">
+                <div class="card-header">
+                    <h3>Agentforce & Dreamforce Prep</h3>
+                    <span class="month-badge">August</span>
+                </div>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/spreadsheets/d/1qQLPi8ReQMCc8NfSs0wKZLJOHZnd99SiJFGihyyKFlg/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Agentforce Audit</a>
+                </div>
+            </div>
+
+            <div class="project-card q3">
+                <div class="card-header">
+                    <h3>Dreamforce Execution</h3>
+                    <span class="month-badge">September</span>
+                </div>
+                <p>Review of Agenda Builder, Agentforce, and Careers Community.</p>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/spreadsheets/d/1qQLPi8ReQMCc8NfSs0wKZLJOHZnd99SiJFGihyyKFlg/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 DF Agentforce</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1XF2sIjVsQmMTanXm9V09EBn4vxg9ED78kzl_23E989M/edit?usp=sharing" target="_blank" class="action-btn sheet">📊 Careers Community</a>
+                </div>
+            </div>
+
+            <div class="project-card q3">
+                <div class="card-header">
+                    <h3>a11To Conference & Brand Refresh</h3>
+                    <span class="month-badge">October</span>
+                </div>
+                <p>Presented at a11To; Reviewed Homepage and Prospect designs.</p>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/document/d/1D9rY_-IxO2aM3d0gLdK7L_n5zl2R3drWUhXTp5uDWgM/edit?usp=sharing" target="_blank" class="action-btn quip">📄 Conference Doc</a>
+                    <span class="action-btn" style="cursor: default; opacity: 0.7;">📄 Homepage PDF</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="q4" class="card-container">
+            <div class="project-card q4">
+                <div class="card-header">
+                    <h3>Automation & Enhancements</h3>
+                    <span class="month-badge">November</span>
+                </div>
+                <p>Researching automation (Silktide/Evinced) and reviewing Page Builder components.</p>
+                <div class="link-grid">
+                    <a href="https://docs.google.com/document/d/1d5AnXlAAl2zQnYD9mqTW8XVRHV8aeAH506lOzOZiEhw/edit?usp=sharing" target="_blank" class="action-btn quip">📄 Page Builder Enhancements</a>
+                    <a href="https://www.figma.com/design/29xAFgv9wjVzujpBicVIUk/EXT-SFDC-Events-Hub---Page-Builder?node-id=460-13855&t=FzGrEbLXsKtE1NKq-4" target="_blank" class="action-btn figma">🎨 Events Hub Figma</a>
+                </div>
+            </div>
+             <div class="project-card q4">
+                <div class="card-header">
+                    <h3>Year-End Summary</h3>
+                    <span class="month-badge">December</span>
+                </div>
+                <p>2025 focused on supporting major DX programs, leading event and component a11y reviews, driving Interactive Maps UAT, coordinating Academy testing, improving processes and tooling, with 2026 goals to prioritize tier-1 sites, use AI for workflow automation, and create AI-generated best-practice videos.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showTab(quarterId) {
+            // Hide all contents
+            document.querySelectorAll('.card-container').forEach(el => el.classList.remove('active'));
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            
+            // Show selected
+            document.getElementById(quarterId).classList.add('active');
+            // Highlight tab (finding by text content matches logic is tricky, so simplified to click event target)
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
